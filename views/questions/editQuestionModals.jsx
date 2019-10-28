@@ -32,13 +32,13 @@ class EditQuestionModals extends React.Component {
                               </div>
                               <div className={"form-group"}>
                                 <label>Description</label>
-                                <textarea className={"form-control"} rows={'5'} name={'book_synopsis'} defaultValue={this.props.question.question_text}></textarea>
+                                <textarea className={"form-control"} type={"text"} rows={'5'} name={'question_text'} defaultValue={this.props.question.question_text}></textarea>
                               </div>
                               <div className={"form-group row"}>
                                 <div className="col-1 text-center my-auto">
                                     <label>Status</label>
                                 </div>
-                                <select className="py-0 offset-1 form-field-height" type={"text"} placeholder={"status"} name={'question_status'}>
+                                <select className="py-0 offset-1 form-field-height" type={"text"} name={'question_status'}>
                                     <option value="open">Open</option>
                                     <option value="resolved">Resolved</option>
                                 </select>

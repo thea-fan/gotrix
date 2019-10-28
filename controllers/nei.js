@@ -128,16 +128,16 @@ module.exports = (db) => {
 
     };
 
-//app.PUT (Update posted activities)
+//app.PUT (Update posted questions)
     let editQuestionController = (request, response) => {
-       let activityId = parseInt(request.params.id);
+       let questionID = parseInt(request.params.id);
 
-        db.nei.submitEdit(request.body, activityId, request.cookies, (err, result) => {
+        db.nei.submitEdit(request.body, questionID, request.cookies, (err, result) => {
             if (err) {
                 response.send(err)
 
             } else {
-                response.redirect("/activity/"+activityId);
+                response.redirect("/activity/"+ questionID);
             }
         });
 

@@ -136,8 +136,9 @@ module.exports = (dbPoolInstance) => {
     }
 
     let submitEdit = (question, Id, cookies, callback) => {
-        let query = "UPDATE question set question_title = $1, equipment = $2, question_photo = $3, question_text = $4, question_status= $5 where qn_id = $6 and user_id = $7 returning *";
+        let query = "UPDATE questions set question_title = $1, equipment = $2, question_photo = $3, question_text = $4, question_status= $5 where qn_id = $6 and user_id = $7 returning *";
         let values = [question.question_title, question.equipment, question.question_photo, question.question_text, question.question_status, Id, parseInt(cookies.user_id)];
+        console.log('******', values)
 
         dbPoolInstance.query(query, values, (error, result) => {
 
