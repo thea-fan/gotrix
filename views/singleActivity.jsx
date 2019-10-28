@@ -98,9 +98,9 @@ class singleActivity extends React.Component {
                         <h6 class="mb-1">Equipment: {question.equipment}</h6>
                         <small className="font-italic text-capitalize">Submitted by {author_username} {postTime} on {postDate}</small>
                     </div>
+                    {editQuestion}
                 </div>
                 <div class = "row px-4 pb-4 mb-4 justify-content-center border-bottom">
-                    {editQuestion}
                     <EDITMODALS question_id = {this.props.Id} question = {this.props.specificQuestion[0]}/>
                     <div class = "mt-4 pr-3">
                         <div>

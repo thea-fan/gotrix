@@ -33,7 +33,8 @@ CREATE TABLE IF NOT EXISTS questions (
 	question_photo  TEXT,
 	user_id INT,
 	question_status TEXT,
-	created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP NOT NULL DEFAULT NOW();
 );
 
 CREATE TABLE IF NOT EXISTS replies (
@@ -54,3 +55,19 @@ CREATE TABLE IF NOT EXISTS users (
 	department TEXT,
 	user_type TEXT
 );
+
+
+
+CREATE OR REPLACE FUNCTION trigger_set_timestamp()
+RETURNS TRIGGER AS $$
+BEGIN
+  NEW.updated_at = NOW();
+  RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER set_timestamp
+BEFORE UPDATE ON questions
+FOR EACH ROW
+EXECUTE PROCEDURE trigger_set_timestamp();
