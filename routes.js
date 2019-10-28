@@ -18,9 +18,8 @@ module.exports = (app, allModels) => {
     app.post('/activity/:id/reply', neiController.newReply);
     app.post('/activity/new', neiController.postNewPost);
     app.get('/activity/new', neiController.newPost);
-    app.delete('/activity/:id/delete', neiController.deleteQuestion);
     app.put('/activity/:id/edit', neiController. editQuestion);
-    app.delete('/activity/:id', neiController.deleteAttending);
+    app.delete('/activity/:id', neiController.deleteQuestion);
     app.post('/activity/:id', neiController.attend);
     app.get('/activity/:id', neiController.activity)
     app.get('/activity', neiController.home);

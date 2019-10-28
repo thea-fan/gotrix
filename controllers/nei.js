@@ -97,32 +97,17 @@ module.exports = (db) => {
         });
     };
 
-//app.DELETE (profile - delete attending activities)
-    let deleteAttendingController = (request, response) => {
-        let activityId = parseInt(request.params.id);
 
-        db.nei.deleteAttending(activityId, request.cookies, (err, result) => {
-            if (err) {
-                response.send(err)
-            }
-
-            else {
-                response.redirect('/profile');
-            }
-        });
-
-    };
-
-//app.DELETE (Update posted activities)
+//app.DELETE (Delete posted question)
     let  deleteQuestionController = (request, response) => {
-       let activityId = parseInt(request.params.id);
+       let questionID = parseInt(request.params.id);
 
-        db.nei.deletePost(activityId, request.cookies, (err, result) => {
+        db.nei.deleteQuestion(questionID, request.cookies, (err, result) => {
             if (err) {
                 response.send(err)
 
             } else {
-                response.redirect("/profile");
+                response.redirect("/home");
             }
         });
 
@@ -327,7 +312,6 @@ module.exports = (db) => {
     registerPost: registerPostController,
     profile: profileController,
     home: homeController,
-    deleteAttending: deleteAttendingController,
     deleteQuestion: deleteQuestionController,
     editQuestion: editQuestionController,
     user: userController,

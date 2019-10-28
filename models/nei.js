@@ -119,9 +119,8 @@ module.exports = (dbPoolInstance) => {
         });
     }
 
-    let deletePost = (activity, cookies, callback) => {
-        let query = "delete from activity where activity.id = $1 and host_id = $2 returning *";
-
+    let deleteQuestion = (activity, cookies, callback) => {
+        let query = "DELETE from questions where qn_id = $1 and user_id = $2 returning *";
         let values = [activity, cookies.user_id];
 
         dbPoolInstance.query(query, values, (error, result) => {
@@ -138,7 +137,6 @@ module.exports = (dbPoolInstance) => {
     let submitEdit = (question, Id, cookies, callback) => {
         let query = "UPDATE questions set question_title = $1, equipment = $2, question_photo = $3, question_text = $4, question_status= $5 where qn_id = $6 and user_id = $7 returning *";
         let values = [question.question_title, question.equipment, question.question_photo, question.question_text, question.question_status, Id, parseInt(cookies.user_id)];
-        console.log('******', values)
 
         dbPoolInstance.query(query, values, (error, result) => {
 
@@ -194,22 +192,6 @@ module.exports = (dbPoolInstance) => {
                         }
                     });
                 }
-        });
-    }
-
-    let deleteAttending = (activity, cookies, callback) => {
-        let query = "delete from respondent where respondent_id = $1 and activity_id = $2 returning *";
-
-        let values = [cookies.user_id, activity];
-
-        dbPoolInstance.query(query, values, (error, result) => {
-
-            if( error ){
-                callback(error, null);
-
-            } else {
-                callback(null, result);
-             }
         });
     }
 
@@ -316,9 +298,8 @@ module.exports = (dbPoolInstance) => {
     getUserDetails,
     showAllQuestions,
     singleQuestion,
-    deleteAttending,
     submitEdit,
-    deletePost,
+    deleteQuestion,
     attendActivity,
     activityOverview,
     attending,
