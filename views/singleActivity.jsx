@@ -44,13 +44,11 @@ class singleActivity extends React.Component {
     let post_time = question.created_date;
     var postTime = moment(post_time).fromNow();
     var postDate = moment(post_time).format('DD MMM YY');
-    let reply_time = question.reply_date;
-    var replyTime = moment(reply_time).fromNow();
-    var replyDate = moment(reply_time).format('DD MMM YY');
+
 
     let reply = "";
 
-    if (numOfReplies[0].reply_text === null){
+    if (numOfReplies[0].replied_user_id === null && numOfReplies[1] === undefined){
         reply = <div className={'mt-2 comment-height text-center'}>
                     <p className={"mb-0"}> No one has replied yet. </p>
                     <small>Be the first to respond.</small>
@@ -58,9 +56,13 @@ class singleActivity extends React.Component {
 
     } else {
 
-        reply = this.props.replyDetails.map(reply =>{
+        reply = this.props.replyDetails.filter(reply => reply.reply_text !== null).map(reply =>{
 
             let reply_username = "";
+            let reply_time = reply.reply_date;
+            let replyTime = moment(reply_time).fromNow();
+            let replyDate = moment(reply_time).format('DD MMM YY');
+
             if (reply.first_name === null){
                 reply_username = "Demo User";
             } else {
