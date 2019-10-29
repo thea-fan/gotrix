@@ -252,18 +252,15 @@ module.exports = (dbPoolInstance) => {
             callback(error, null);
 
             } else {
-                callback(null, questionID);
 
                 let reply = "INSERT into replies (question_id) values ($1)"
                 let question_id = [questionID];
 
                 dbPoolInstance.query(reply, question_id, (error, result) => {
                     let questionID = question_id
-                    //console.log('%%%%%%%%', questionID)
 
                     if( error ){
                     callback(error, null);
-                    //console.log('&&&&&&&&', error)
 
                     } else {
                         callback(null, questionID);

@@ -254,6 +254,7 @@ module.exports = (db) => {
                 response.send(err)
 
             } else {
+                console.log('9999999999')
                 response.redirect('/activity/'+ questionID)
             };
         });
