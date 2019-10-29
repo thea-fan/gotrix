@@ -14,11 +14,11 @@ if( process.env.DATABASE_URL ){
 
   //make the configs object
   var configs = {
-    user: gotrix,
-    password: gotrix2020,
-    host: gotrix.cdqhdgzkhqoa.ap-southeast-1.rds.amazonaws.com,
-    port: 5432,
-    database: gotrix,
+    user: auth[0],
+    password: auth[1],
+    host: params.hostname,
+    port: params.port,
+    database: params.pathname.split('/')[1],
     ssl: true
   };
 

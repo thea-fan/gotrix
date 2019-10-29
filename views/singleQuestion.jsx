@@ -17,6 +17,13 @@ class SingleQuestion extends React.Component {
 
     let question = this.props.specificQuestion[0];
 
+    let updatedQnTime = "";
+        if (moment(question.created_date).format('lll') !== moment(question.updated_at).format('lll')){
+            updatedQnTime = <small>, updated on {moment(question.updated_at).format('lll')}</small>
+        } else {
+            updatedQnTime;
+        }
+
     let author_username = "";
         if (question.first_name  === null){
             author_username = "Demo User";
@@ -41,11 +48,10 @@ class SingleQuestion extends React.Component {
             editQuestion;
         }
 
-    let numOfReplies = this.props.replyDetails;
     let questionURL = "/activity/"+this.props.Id;
     let post_time = question.created_date;
     var postTime = moment(post_time).format('lll');
-
+    let numOfReplies = this.props.replyDetails;
 
     let reply = "";
 
@@ -67,10 +73,12 @@ class SingleQuestion extends React.Component {
             let deleteReplyModalID = "delete-reply-"+index;
             let deleteReplyModalButtonID = "#delete-reply-"+index;
 
-            // let updatedTime = "";
-            // if (reply.reply_date !== reply.updated_at){
-            //     updatedTime =
-            // }
+            let updatedTime = "";
+            if (moment(reply.reply_date).format('lll') !== moment(reply.updated_at).format('lll')){
+                updatedTime = <small>Updated on {moment(reply.updated_at).format('lll')}</small>
+            } else {
+                updatedTime;
+            }
 
             let editReply = "";
             if (parseInt(reply.replied_user_id) === parseInt(this.props.status.user_id)){
@@ -105,12 +113,13 @@ class SingleQuestion extends React.Component {
                             <span class = "text-capitalize">{reply_username}</span>
                         </div>
 
-                        <div className={'col-10 d-flex flex-column justify-content-center pb-4 border-bottom comment-height'}>
+                        <div className={'col-10 d-flex flex-column justify-content-center pb-2 border-bottom comment-height'}>
                             <div className="row">
-                                <p className="col-10">{reply.reply_text.charAt(0).toUpperCase() + reply.reply_text.slice(1)}</p>
+                                <h6 className="col-10 pb-2">{reply.reply_text.charAt(0).toUpperCase() + reply.reply_text.slice(1)}</h6>
                                 {editReply}
                             </div>
                             <small> Replied on {replyTime} </small>
+                            {updatedTime}
                         </div>
                      </div>
             )
@@ -129,6 +138,7 @@ class SingleQuestion extends React.Component {
                         <h3 class = "text-uppercase font-weight-bold mb-0">{question.question_title}</h3>
                         <h6 class="mb-1 text-capitalize">Equipment: {question.equipment}</h6>
                         <small className="font-italic text-capitalize">Submitted by {author_username} on {postTime} </small>
+                        {updatedQnTime}
                     </div>
                     {editQuestion}
                 </div>

@@ -17,7 +17,7 @@ class EditReplyModals extends React.Component {
                             <form method={'POST'} action={'/activity/'+this.props.question_id+'/reply/'+this.props.reply_id + '/edit?_method=PUT'}>
                               <div className={"form-group"}>
                                 <label>Your Reply</label>
-                                <textarea className={"form-control"} type={"text"} rows={'5'} name={'reply_text'} defaultValue={this.props.current_reply.charAt(0).toUpperCase() + this.props.current_reply.slice(1)}></textarea>
+                                <textarea className={"form-control"} type={"text"} rows={'5'} name={'reply_text'} defaultValue={this.props.current_reply.charAt(0).toUpperCase() + this.props.current_reply.slice(1)} required></textarea>
                                   </div>
                               <div class="modal-footer">
                                 <button type={"button"} class={"btn btn-light"} data-dismiss={"modal"}>Close</button>
