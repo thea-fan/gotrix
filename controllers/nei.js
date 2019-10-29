@@ -144,7 +144,7 @@ module.exports = (db) => {
                     status : request.cookies
                 }
 
-                response.render('singleActivity',data);
+                response.render('singleQuestion',data);
             }
         });
     };

@@ -7,7 +7,7 @@ var EditQuestionModals = require('./questions/editQuestionModals.jsx');
 var EditReplyModals = require('./questions/editReplyModals.jsx');
 var moment = require('moment');
 
-class SingleActivity extends React.Component {
+class SingleQuestion extends React.Component {
   render() {
     if (this.props.status.loggedIn !== undefined ){
         Layout = memberNav;
@@ -66,6 +66,11 @@ class SingleActivity extends React.Component {
             let editReplyModalButtonID = "#edit-reply-"+index;
             let deleteReplyModalID = "delete-reply-"+index;
             let deleteReplyModalButtonID = "#delete-reply-"+index;
+
+            // let updatedTime = "";
+            // if (reply.reply_date !== reply.updated_at){
+            //     updatedTime =
+            // }
 
             let editReply = "";
             if (parseInt(reply.replied_user_id) === parseInt(this.props.status.user_id)){
@@ -155,4 +160,4 @@ class SingleActivity extends React.Component {
   }
 }
 
-module.exports = SingleActivity;
+module.exports = SingleQuestion;

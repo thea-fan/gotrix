@@ -42,7 +42,8 @@ CREATE TABLE IF NOT EXISTS replies (
 	replied_user_id INT,
 	question_id INT,
 	reply_text TEXT,
-	reply_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	reply_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	updated_at TIMESTAMP NOT NULL DEFAULT NOW();
 );
 
 CREATE TABLE IF NOT EXISTS users (
@@ -68,6 +69,6 @@ $$ LANGUAGE plpgsql;
 
 
 CREATE TRIGGER set_timestamp
-BEFORE UPDATE ON questions
+BEFORE UPDATE ON questions, replies
 FOR EACH ROW
 EXECUTE PROCEDURE trigger_set_timestamp();
