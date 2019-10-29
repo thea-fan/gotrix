@@ -15,7 +15,9 @@ module.exports = (app, allModels) => {
   // require the controller
   const neiController = require('./controllers/nei')(allModels);
 
-    app.post('/activity/:id/reply', neiController.newReply);
+    app.post('/activity/:id/reply/', neiController.newReply);
+    app.put('/activity/:id/reply/:reply_id/edit', neiController.editReply);
+    app.delete('/activity/:id/reply/:reply_id', neiController.deleteReply);
     app.post('/activity/new', neiController.postNewPost);
     app.get('/activity/new', neiController.newPost);
     app.put('/activity/:id/edit', neiController. editQuestion);

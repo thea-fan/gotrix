@@ -98,7 +98,7 @@ module.exports = (db) => {
     };
 
 
-//app.DELETE (Delete posted question)
+//app.DELETE (Delete question)
     let  deleteQuestionController = (request, response) => {
        let questionID = parseInt(request.params.id);
 
@@ -113,11 +113,11 @@ module.exports = (db) => {
 
     };
 
-//app.PUT (Update posted questions)
+//app.PUT (Update questions)
     let editQuestionController = (request, response) => {
        let questionID = parseInt(request.params.id);
 
-        db.nei.submitEdit(request.body, questionID, request.cookies, (err, result) => {
+        db.nei.editQuestion(request.body, questionID, request.cookies, (err, result) => {
             if (err) {
                 response.send(err)
 
@@ -143,8 +143,6 @@ module.exports = (db) => {
                     Id : questionId,
                     status : request.cookies
                 }
-
-                // console.log('&&&&&&', data.specificQuestion, data.replyDetails)
 
                 response.render('singleActivity',data);
             }
@@ -254,10 +252,41 @@ module.exports = (db) => {
                 response.send(err)
 
             } else {
-                console.log('9999999999')
                 response.redirect('/activity/'+ questionID)
             };
         });
+    };
+
+//app.DELETE (Delete reply)
+    let  deleteReplyController = (request, response) => {
+       let questionID = parseInt(request.params.id);
+       let replyID = parseInt(request.params.reply_id);
+
+        db.nei.deleteReply(replyID, request.cookies, (err, result) => {
+            if (err) {
+                response.send(err)
+
+            } else {
+                response.redirect("/activity/"+ questionID);
+            }
+        });
+
+    };
+
+//app.PUT (Update reply)
+    let editReplyController = (request, response) => {
+       let questionID = parseInt(request.params.id);
+       let replyID = parseInt(request.params.reply_id);
+
+        db.nei.editReply(request.body, replyID, request.cookies, (err, result) => {
+            if (err) {
+                response.send(err)
+
+            } else {
+                response.redirect("/activity/"+ questionID);
+            }
+        });
+
     };
 
 //app.POST (new - post new reply)
@@ -319,6 +348,8 @@ module.exports = (db) => {
     attend: attendController,
     activity: activityController,
     newReply: newReplyController,
+    editReply: editReplyController,
+    deleteReply: deleteReplyController,
     newPost: newPostController,
     postNewPost: postNewPostController,
     logout: logoutController,

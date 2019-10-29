@@ -3,10 +3,11 @@ var React = require('react');
 var Layout;
 var memberNav = require('./components/layout.jsx');
 var nonMemberNav = require('./login/rootLayout.jsx');
-var EDITMODALS = require('./questions/editQuestionModals.jsx');
+var EditQuestionModals = require('./questions/editQuestionModals.jsx');
+var EditReplyModals = require('./questions/editReplyModals.jsx');
 var moment = require('moment');
 
-class singleActivity extends React.Component {
+class SingleActivity extends React.Component {
   render() {
     if (this.props.status.loggedIn !== undefined ){
         Layout = memberNav;
@@ -30,10 +31,11 @@ class singleActivity extends React.Component {
                     <span data-toggle={"modal"} data-target={"#editQuestionModal"} className={"mr-3"} >
                         <i class="fas fa-edit"></i>
                     </span>
-                        <span data-toggle={"modal"} data-target={"#deleteQuestionModal"}>
-                            <i class="fas fa-trash"></i>
-                        </span>
-                    </div>
+                    <span data-toggle={"modal"} data-target={"#deleteQuestionModal"}>
+                        <i class="fas fa-trash"></i>
+                    </span>
+                    <EditQuestionModals question_id = {this.props.Id} question = {this.props.specificQuestion[0]}/>
+                </div>
             )
         } else {
             editQuestion;
@@ -42,8 +44,7 @@ class singleActivity extends React.Component {
     let numOfReplies = this.props.replyDetails;
     let questionURL = "/activity/"+this.props.Id;
     let post_time = question.created_date;
-    var postTime = moment(post_time).fromNow();
-    var postDate = moment(post_time).format('DD MMM YY');
+    var postTime = moment(post_time).format('lll');
 
 
     let reply = "";
@@ -56,12 +57,34 @@ class singleActivity extends React.Component {
 
     } else {
 
-        reply = this.props.replyDetails.filter(reply => reply.reply_text !== null).map(reply =>{
+        reply = this.props.replyDetails.filter(reply => reply.reply_text !== null).map((reply, index) =>{
 
             let reply_username = "";
             let reply_time = reply.reply_date;
-            let replyTime = moment(reply_time).fromNow();
-            let replyDate = moment(reply_time).format('DD MMM YY');
+            let replyTime = moment(reply_time).format('lll');
+            let editReplyModalID = "edit-reply-"+index;
+            let editReplyModalButtonID = "#edit-reply-"+index;
+            let deleteReplyModalID = "delete-reply-"+index;
+            let deleteReplyModalButtonID = "#delete-reply-"+index;
+
+            let editReply = "";
+            if (parseInt(reply.replied_user_id) === parseInt(this.props.status.user_id)){
+                editReply = (
+                <div>
+                    <div className = {'row mb-4 edit-question-controls'} >
+                        <span data-toggle="modal" data-target={editReplyModalButtonID} className={"mr-3"} >
+                            <i class="fas fa-edit"></i>
+                        </span>
+                        <span data-toggle="modal" data-target={deleteReplyModalButtonID}>
+                            <i class="fas fa-trash"></i>
+                        </span>
+                    </div>
+                    <EditReplyModals editID = {editReplyModalID} deleteID = {deleteReplyModalID} question_id ={reply.question_id} current_reply = {reply.reply_text} reply_id={reply.reply_id}/>
+                </div>
+                )
+            } else {
+                editReply;
+            }
 
             if (reply.first_name === null){
                 reply_username = "Demo User";
@@ -76,9 +99,13 @@ class singleActivity extends React.Component {
                                 alt="User picture"/>
                             <span class = "text-capitalize">{reply_username}</span>
                         </div>
+
                         <div className={'col-10 d-flex flex-column justify-content-center pb-4 border-bottom comment-height'}>
-                            <p>{reply.reply_text}</p>
-                            <small> Replied {replyTime} on {replyDate}</small>
+                            <div className="row">
+                                <p className="col-10">{reply.reply_text.charAt(0).toUpperCase() + reply.reply_text.slice(1)}</p>
+                                {editReply}
+                            </div>
+                            <small> Replied on {replyTime} </small>
                         </div>
                      </div>
             )
@@ -95,16 +122,16 @@ class singleActivity extends React.Component {
                     </div>
                     <div className = "offset-1">
                         <h3 class = "text-uppercase font-weight-bold mb-0">{question.question_title}</h3>
-                        <h6 class="mb-1">Equipment: {question.equipment}</h6>
-                        <small className="font-italic text-capitalize">Submitted by {author_username} {postTime} on {postDate}</small>
+                        <h6 class="mb-1 text-capitalize">Equipment: {question.equipment}</h6>
+                        <small className="font-italic text-capitalize">Submitted by {author_username} on {postTime} </small>
                     </div>
                     {editQuestion}
                 </div>
                 <div class = "row px-4 pb-4 mb-4 justify-content-center border-bottom">
-                    <EDITMODALS question_id = {this.props.Id} question = {this.props.specificQuestion[0]}/>
+
                     <div class = "mt-4 pr-3">
                         <div>
-                            <h6 className = "mb-3">{question.question_text}</h6>
+                            <h6 className = "mb-3">{question.question_text.charAt(0).toUpperCase() + question.question_text.slice(1)}</h6>
                             <div>
                                 <img className = "single-question-photo mx-auto" src={question.question_photo}/>
                             </div>
@@ -114,7 +141,7 @@ class singleActivity extends React.Component {
                 <div className={'px-2 pb-4 comment-height'}>
                     <form method={'POST'} action={'/activity/'+this.props.Id+'/reply'}>
                       <div class="input-group mb-3">
-                        <textarea name="reply_text" type="text" className="col mb-0" rows="3" placeholder="Your reply"/>
+                        <textarea name="reply_text" type="text" className="col mb-0" rows="3" placeholder="Your reply" required/>
                         <div class="input-group-append">
                             <button class="btn btn-dark" type="submit">Submit</button>
                           </div>
@@ -128,4 +155,4 @@ class singleActivity extends React.Component {
   }
 }
 
-module.exports = singleActivity;
+module.exports = SingleActivity;

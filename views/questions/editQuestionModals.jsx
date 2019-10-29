@@ -17,11 +17,11 @@ class EditQuestionModals extends React.Component {
                             <form method={'POST'} action={'/activity/'+this.props.question_id+'/edit?_method=PUT'}>
                               <div className={"form-group "}>
                                 <label>Question Title</label>
-                                <input type={"text"} className={"form-control"} name={'question_title'} defaultValue={this.props.question.question_title} />
+                                <input type={"text"} className={"form-control"} name={'question_title'} defaultValue={this.props.question.question_title.charAt(0).toUpperCase() + this.props.question.question_title.slice(1)} />
                               </div>
                               <div className={"form-group"}>
                                 <label>Equipment</label>
-                                <input type={"text"} className={"form-control"} name={'equipment'} defaultValue={this.props.question.equipment} />
+                                <input type={"text"} className={"form-control"} name={'equipment'} defaultValue={this.props.question.equipment.charAt(0).toUpperCase() + this.props.question.equipment.slice(1)} />
                               </div>
                               <div className={"form-group"}>
                                 <label>Photo</label>
@@ -32,7 +32,7 @@ class EditQuestionModals extends React.Component {
                               </div>
                               <div className={"form-group"}>
                                 <label>Description</label>
-                                <textarea className={"form-control"} type={"text"} rows={'5'} name={'question_text'} defaultValue={this.props.question.question_text}></textarea>
+                                <textarea className={"form-control"} type={"text"} rows={'5'} name={'question_text'} defaultValue={this.props.question.question_text.charAt(0).toUpperCase() + this.props.question.question_text.slice(1)}></textarea>
                               </div>
                               <div className={"form-group row"}>
                                 <div className="col-1 text-center my-auto">

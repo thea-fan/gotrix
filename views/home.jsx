@@ -7,7 +7,6 @@ class Home extends React.Component {
   render() {
 
     const questions = this.props.allQuestions.map(question =>{
-         console.log('$$$$$$$$', question)
         let username = ""
         if (question.first_name === null){
             username = "Demo User";
