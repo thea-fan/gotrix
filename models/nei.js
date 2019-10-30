@@ -188,7 +188,6 @@ module.exports = (dbPoolInstance) => {
                         } else {
                             data.replyDetails = replyDetails.rows;
                             callback(null, data);
-                            // console.log('%%%%%%%%%%', data)
                         }
                     });
                 }

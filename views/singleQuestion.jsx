@@ -31,6 +31,13 @@ class SingleQuestion extends React.Component {
             author_username = question.first_name.toLowerCase().replace(/\b(\w)/g, x => { return x.toUpperCase(); }) + " " + question.last_name.toLowerCase().replace(/\b(\w)/g, x => { return x.toUpperCase(); });
         }
 
+    let questionStatus = ""
+        if (question.question_status === "open"){
+            questionStatus = <span class="badge badge-warning">OPEN</span>
+        } else if (question.question_status === "resolved"){
+            questionStatus = <span class="badge badge-secondary">RESOLVED</span>
+        }
+
     let editQuestion = ""
         if (parseInt(question.user_id) === parseInt(this.props.status.user_id)){
             editQuestion = (
@@ -134,13 +141,15 @@ class SingleQuestion extends React.Component {
                         <img class="img-responsive img-rounded profile-icon" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
                             alt="User picture"/>
                     </div>
-                    <div className = "offset-1">
-                        <h3 class = "text-uppercase font-weight-bold mb-0">{question.question_title}</h3>
-                        <h6 class="mb-1 text-capitalize">Equipment: {question.equipment}</h6>
-                        <small className="font-italic text-capitalize">Submitted by {author_username} on {postTime} </small>
+                    <div className = "offset-1 col-10">
+                        <h3 class = "text-uppercase font-weight-bold mb-0 pr-2">{question.question_title}</h3>
+                        <div className="row">
+                            <h6 class="mb-1 text-capitalize pl-3">Equipment: {question.equipment} {questionStatus}</h6>
+                            {editQuestion}
+                        </div>
+                        <small className="font-italic text-capitalize">Submitted by {author_username} on {postTime}</small>
                         {updatedQnTime}
                     </div>
-                    {editQuestion}
                 </div>
                 <div class = "row px-4 pb-4 mb-4 justify-content-center border-bottom">
 

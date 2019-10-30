@@ -19,6 +19,13 @@ class Home extends React.Component {
             ownershipIndicator = <i className="fas fa-2x fa-bookmark"></i>
         }
 
+        let questionStatus = ""
+        if (question.question_status === "open"){
+            questionStatus = <span class="mt-3 badge badge-warning">OPEN</span>
+        } else if (question.question_status === "resolved"){
+            questionStatus = <span class="mt-3 badge badge-secondary">RESOLVED</span>
+        }
+
         let numOfReplies = question.count;
         let questionURL ="/activity/"+question.qn_id;
         let userURL = "/user/"+question.user_id;
@@ -38,7 +45,7 @@ class Home extends React.Component {
                         </div>
                         <div class="col-7">
                            <a href={questionURL}>
-                            <span class="mt-3 badge badge-secondary">{question.question_status}</span>
+                            {questionStatus}
                             <p class="home-activity-name text-capitalise font-weight-bold my-1">{questionTitle} <br/></p>
                             </a>
                             <p class ="text-capitalise"><span className="badge badge-equipment">{equipment}</span></p>

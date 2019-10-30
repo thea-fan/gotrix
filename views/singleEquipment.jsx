@@ -20,6 +20,7 @@ class SingleEquipment extends React.Component {
             ownershipIndicator = <i className="fas fa-2x fa-bookmark"></i>
         }
 
+
         let numOfReplies = question.count;
         let questionURL ="/activity/"+question.qn_id;
         let userURL = "/user/"+question.user_id;
