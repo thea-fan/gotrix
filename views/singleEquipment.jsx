@@ -3,10 +3,11 @@ var Layout = require('./components/layout.jsx');
 var moment = require('moment');
 
 
-class Home extends React.Component {
+class SingleEquipment extends React.Component {
   render() {
 
-    const questions = this.props.allQuestions.map(question =>{
+    let questions = this.props.questionList.map(question => {
+
         let username = ""
         if (question.first_name === null){
             username = "Demo User";
@@ -43,7 +44,7 @@ class Home extends React.Component {
                             </a>
                             <p class ="text-capitalise"><span className="badge badge-equipment">{equipment}</span></p>
                         </div>
-                        <div class = " mt-5 d-flex flex-column align-items-center justify-content-center">
+                        <div class = " mt-5 d-flex flex-column align-items-center">
                             <small>Asked on {postTime}</small>
                             <div className="row">
                                 <img class="img-responsive img-rounded home-profile-icon pr-2" src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
@@ -74,5 +75,4 @@ class Home extends React.Component {
     );
   }
 }
-
-module.exports = Home;
+module.exports = SingleEquipment;

@@ -57,7 +57,7 @@ class Navbar extends React.Component {
                             </div>
                         </li>
                         <li class="sidebar">
-                            <a href="#">
+                            <a href="/equipment">
                                 <i class="fas fa-wrench"></i>
                                 <span>Equipment</span>
                                 <span class="badge badge-pill badge-warning">New</span>

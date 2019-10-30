@@ -226,6 +226,38 @@ module.exports = (dbPoolInstance) => {
         });
     }
 
+    let allEquipment = (cookies, callback) => {
+
+        let query = "SELECT qn_id, question_title, questions.equipment, user_id, count from (select equipment, count(DISTINCT equipment) FROM questions GROUP BY equipment) AS foo INNER JOIN questions ON foo.equipment = questions.equipment LEFT JOIN users ON users.id = user_id ORDER BY created_date DESC";
+
+        dbPoolInstance.query(query, (error, result) => {
+
+            if( error ){
+                callback(error, null);
+
+            } else {
+                callback(null, result);
+             }
+        });
+    }
+
+    let singleEquipment = (equipment, cookies, callback) => {
+
+        let query = "SELECT * from (select question_id, count(reply_text) FROM replies GROUP BY question_id) AS foo INNER JOIN questions ON question_id = qn_id LEFT JOIN users ON users.id = user_id  where equipment = $1 ORDER BY created_date DESC";
+        let values = [equipment];
+
+        dbPoolInstance.query(query, values, (error, result) => {
+
+            if( error ){
+                callback(error, null);
+                console.log(error);
+
+            } else {
+                callback(null, result);
+             }
+        });
+    }
+
     let getUserDetails  = (user, cookies, callback) => {
         let query = "SELECT * from users where email = $1";
         let values = [user];
@@ -329,6 +361,8 @@ module.exports = (dbPoolInstance) => {
     singleQuestion,
     editQuestion,
     deleteQuestion,
+    allEquipment,
+    singleEquipment,
     attendActivity,
     activityOverview,
     attending,

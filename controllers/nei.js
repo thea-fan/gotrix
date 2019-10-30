@@ -128,8 +128,8 @@ module.exports = (db) => {
 
     };
 
-//app.GET (activity - view respective activity)
-    let activityController = (request, response) => {
+//app.GET (view respective question)
+    let questionController = (request, response) => {
         let questionId = parseInt(request.params.id);
 
         db.nei.singleQuestion(questionId, request.cookies, (err, result) => {
@@ -148,6 +148,46 @@ module.exports = (db) => {
             }
         });
     };
+
+//app.GET (view all equipment)
+    let equipmentController = (request, response) => {
+
+        db.nei.allEquipment(request.cookies, (err, result) => {
+            if (err) {
+                response.send(err)
+            }
+            else {
+                let data = {
+                    equipmentList : result.rows,
+                    status : request.cookies
+                }
+
+                response.render('allEquipment',data);
+            }
+        });
+    };
+
+//app.GET (view single equipment)
+    let singleEquipmentController = (request, response) => {
+        let equipment = request.params.name;
+
+        db.nei.singleEquipment(equipment, request.cookies, (err, result) => {
+            if (err) {
+                response.send(err)
+            }
+            else {
+                let data = {
+                    questionList : result.rows,
+                    status : request.cookies
+                }
+
+                response.render('singleEquipment',data);
+            }
+        });
+    };
+
+
+
 
 //app.POST (attend activity)
     let attendController = (request, response) => {
@@ -229,7 +269,7 @@ module.exports = (db) => {
         } else {
             db.nei.getUserDetails(request.body, request.cookies, (err, result) => {
             if (err) {
-                response.send(err)
+                response.send(err);
             }
             else {
                 let data = {
@@ -346,7 +386,9 @@ module.exports = (db) => {
     editQuestion: editQuestionController,
     user: userController,
     attend: attendController,
-    activity: activityController,
+    question: questionController,
+    equipment: equipmentController,
+    singleEquipment: singleEquipmentController,
     newReply: newReplyController,
     editReply: editReplyController,
     deleteReply: deleteReplyController,

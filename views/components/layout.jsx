@@ -27,7 +27,7 @@ class Layout extends React.Component {
                     <main class="page-content">
                         <div class="container-fluid p-0">
                             {this.props.children    }
-                            <script src="./script.js"/>
+                            <script src="/script.js"/>
                         </div>
                     </main>
                 </div>
