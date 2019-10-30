@@ -20,7 +20,7 @@ class AllEquipment extends React.Component {
                  <div className = "category-card col-3 card card--hasShadow text-center p-0">
                     <div className = "row mt-3">
                         <div className = "col-8 pl-5 text-left">
-                            <h4>{name}</h4>
+                            <h4 className = "mt-4">{name}</h4>
                             <small>{equipment.count}</small>
                         </div>
                         <img className = "col-3 p-0" src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQP4_jgCfj1rGyeZwCX2tE2rgtxZLMWsArDzYCvP3d44B52jE9c&s"/>
