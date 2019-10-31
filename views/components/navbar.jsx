@@ -36,25 +36,15 @@ class Navbar extends React.Component {
                         <li class="sidebar">
                             <a href='/home'>
                                 <i class="fa fa-tachometer-alt"></i>
-                                <span>Dashboard</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-dropdown">
-                            <a href="#">
-                                <i class="fa fa-folder"></i>
-                                <span>Questions</span>
+                                <span>Issues</span>
                                 <span class="badge badge-pill badge-danger">3</span>
                             </a>
-                            <div class="sidebar-submenu">
-                                <ul>
-                                    <li>
-                                        <a href="/activity/new">Add New</a>
-                                    </li>
-                                    <li>
-                                        <a href={'/home/'+this.props.user_id}>Posted</a>
-                                    </li>
-                                </ul>
-                            </div>
+                        </li>
+                        <li class="sidebar">
+                            <a href="/activity/new">
+                                <i class="fa fa-folder"></i>
+                                <span>Add New Issue</span>
+                            </a>
                         </li>
                         <li class="sidebar">
                             <a href="/equipment">
@@ -63,43 +53,18 @@ class Navbar extends React.Component {
                                 <span class="badge badge-pill badge-warning">New</span>
                             </a>
                         </li>
-                        <li class="header-menu">
-                            <span>Beta</span>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-book"></i>
-                                <span>Documentation</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-calendar"></i>
-                                <span>Calendar</span>
-                            </a>
-                        </li>
-                        <li class="sidebar">
-                            <a href="#">
-                              <i class="fa fa-globe"></i>
-                              <span>Maps</span>
-                              <span class="badge badge-pill badge-success">Pro</span>
-                            </a>
-                        </li>
                     </ul>
                 </div>
             </div>
             <div class="sidebar-footer">
       <a href="#">
         <i class="fa fa-bell"></i>
-        <span class="badge badge-pill badge-warning notification">3</span>
       </a>
       <a href="#">
         <i class="fa fa-envelope"></i>
-        <span class="badge badge-pill badge-success notification">7</span>
       </a>
       <a href='<%=edit_user_registration_path%>'>
         <i class="fa fa-cog"></i>
-        <span class="badge-sonar"></span>
       </a>
       <a href = "/logout">
         <i class="fa fa-power-off"></i>

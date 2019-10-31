@@ -25,10 +25,8 @@ class EditQuestionModals extends React.Component {
                               </div>
                               <div className={"form-group"}>
                                 <label>Photo</label>
-                                <div className="custom-file form-field-height">
-                                    <input type="file" class="custom-file-input"/>
-                                    <label className={"custom-file-label"} defaultValue={this.props.question.question_photo} name={'question_photo'}/>
-                                </div>
+                                <input type={"text"} className={"form-control"} defaultValue={this.props.question.question_photo} name={'question_photo'}/>
+
                               </div>
                               <div className={"form-group"}>
                                 <label>Description</label>

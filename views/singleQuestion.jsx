@@ -144,7 +144,7 @@ class SingleQuestion extends React.Component {
                     <div className = "offset-1 col-10">
                         <h3 class = "text-uppercase font-weight-bold mb-0 pr-2">{question.question_title}</h3>
                         <div className="row">
-                            <h6 class="mb-1 text-capitalize pl-3">Equipment: {question.equipment} {questionStatus}</h6>
+                            <h6 class="mb-1 text-capitalize pl-3">Equipment: <a href = {"/equipment/"+ question.equipment}> {question.equipment}</a> {questionStatus}</h6>
                             {editQuestion}
                         </div>
                         <small className="font-italic text-capitalize">Submitted by {author_username} on {postTime}</small>

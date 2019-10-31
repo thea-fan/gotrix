@@ -30,7 +30,7 @@ class Home extends React.Component {
         let questionURL ="/activity/"+question.qn_id;
         let userURL = "/user/"+question.user_id;
         let questionTitle = question.question_title.toLowerCase().replace(/\b(\w)/g, x => { return x.toUpperCase(); });
-        let equipment = question.equipment.toLowerCase().replace(/\b(\w)/g, x => { return x.toUpperCase(); });
+        let equipmentName = question.equipment.toLowerCase().replace(/\b(\w)/g, x => { return x.toUpperCase(); });
         let created_time = question.created_date;
         var postTime = moment(created_time).format('lll');
 
@@ -48,7 +48,7 @@ class Home extends React.Component {
                             {questionStatus}
                             <p class="home-activity-name text-capitalise font-weight-bold my-1">{questionTitle} <br/></p>
                             </a>
-                            <p class ="text-capitalise"><span className="badge badge-equipment">{equipment}</span></p>
+                            <p class ="text-capitalise"><a href = {"/equipment/"+question.equipment}className="badge badge-equipment">{equipmentName}</a></p>
                         </div>
                         <div class = " mt-5 d-flex flex-column align-items-center justify-content-center">
                             <small>Asked on {postTime}</small>

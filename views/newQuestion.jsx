@@ -8,7 +8,7 @@ class newQuestion extends React.Component {
             <div class = "bg-white pb-4 col-8 offset-2 border rounded mt-4 px-5">
                 <div className={'row'}>
                     <div className={'col-10 offset-1 mt-5'}>
-                        <h1> Add New Question </h1>
+                        <h1> Add An New Issue </h1>
                         <form method={'POST'} action={'/activity/new'}>
                           <div className={"form-group row"}>
                             <div className="col-2 text-center my-auto">
@@ -34,7 +34,7 @@ class newQuestion extends React.Component {
                             </div>
                                 <div className="custom-file col-6 form-field-height">
                                     <input type="file" class="custom-file-input" id="customFile"/>
-                                    <label className={"custom-file-label"} placeholder={"Photos"} name={'question_photo'} >/img/default-book.jpg</label>
+                                    <label className={"custom-file-label"} placeholder={"Photos"} name={'question_photo'} >/img/default-engine.jpg</label>
                               </div>
                           </div>
                           <div className={"form-group row"}>
